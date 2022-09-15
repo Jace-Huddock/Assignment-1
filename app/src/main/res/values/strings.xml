@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">ICS342Proj</string>
+    <string name="ICS342Proj">ICS342Proj</string>
+    <string name="city_name">St. Paul, MN</string>
+    <string name="current_temp">72</string>
 </resources>
