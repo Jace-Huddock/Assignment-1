@@ -2,4 +2,9 @@
     <string name="ICS342Proj">ICS342Proj</string>
     <string name="city_name">St. Paul, MN</string>
     <string name="current_temp">72</string>
+    <string name="Feels_like_78">Feels like 78</string>
+    <string name="textView4">Low 65</string>
+    <string name="textView5">High 80</string>
+    <string name="textView6">Humidity 100%</string>
+    <string name="textView7">Pressure 1023 hPa</string>
 </resources>
