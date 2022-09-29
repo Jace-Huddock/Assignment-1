@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Jmhud/AndroidStudioProjects/ICS342Proj/app/src/main/res/layout/activity_main.xml" value="0.17083333333333334" />
+        <entry key="..\:/Users/Jmhud/AndroidStudioProjects/ICS342Proj/app/src/main/res/layout/fragment_current_conditions.xml" value="0.2390625" />
+        <entry key="..\:/Users/Jmhud/AndroidStudioProjects/ICS342Proj/app/src/main/res/layout/fragment_forecast.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Jmhud/AndroidStudioProjects/ICS342Proj/app/src/main/res/layout/view_forecast_item.xml" value="0.253125" />
       </map>
     </option>
   </component>
