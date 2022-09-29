@@ -14,6 +14,7 @@ class ForecastAdapter(private val data: List<Forecast>) : RecyclerView.Adapter<F
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
+        val oldText = holder.forecastTemp.text
         holder.bind(data[position])
     }
 
@@ -21,7 +22,7 @@ class ForecastAdapter(private val data: List<Forecast>) : RecyclerView.Adapter<F
 }
 
 class ForecastViewHolder(view: View) : RecyclerView.ViewHolder(view){
-    private val forecastTemp: TextView
+    val forecastTemp: TextView
 
     init {
         forecastTemp = view.findViewById(R.id.forecast_temp)
