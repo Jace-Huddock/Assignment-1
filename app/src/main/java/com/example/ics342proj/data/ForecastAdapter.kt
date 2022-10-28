@@ -5,8 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ics342proj.data.DayForecast
 
-class ForecastAdapter(private val data: List<Forecast>) : RecyclerView.Adapter<ForecastViewHolder>() {
+class ForecastAdapter(private val data: List<DayForecast>) : RecyclerView.Adapter<ForecastViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.view_forecast_item, parent, false)
@@ -14,7 +16,6 @@ class ForecastAdapter(private val data: List<Forecast>) : RecyclerView.Adapter<F
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        val oldText = holder.forecastTemp.text
         holder.bind(data[position])
     }
 
@@ -22,13 +23,13 @@ class ForecastAdapter(private val data: List<Forecast>) : RecyclerView.Adapter<F
 }
 
 class ForecastViewHolder(view: View) : RecyclerView.ViewHolder(view){
-    val forecastTemp: TextView
+    private val forecastTemp: TextView
 
     init {
         forecastTemp = view.findViewById(R.id.forecast_temp)
     }
 
-    fun bind(data: Forecast){
-        forecastTemp.text = data.temp
+    fun bind(data: DayForecast){
+        forecastTemp.text = data.temp.max.toString()
     }
 }

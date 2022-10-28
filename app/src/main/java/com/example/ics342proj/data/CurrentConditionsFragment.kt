@@ -1,9 +1,10 @@
-package com.example.ics342proj
-
+package com.example.ics342proj.data
+/*
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.ics342proj.R
 import com.example.ics342proj.databinding.FragmentCurrentConditionsBinding
 
 class CurrentConditionsFragment : Fragment(R.layout.fragment_current_conditions) {
@@ -14,7 +15,10 @@ class CurrentConditionsFragment : Fragment(R.layout.fragment_current_conditions)
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCurrentConditionsBinding.bind(view)
         binding.forecastButton.setOnClickListener {
-            findNavController().navigate(R.id.action_currentConditionsFragment_to_forecastFragment)
+            val forecast = Forecast("101")
+            val action =CurrentConditionsFragmentDirections.actionCurrentConditionsFragmentToForecastFragment(forecast)
+            findNavController().navigate(action)
         }
     }
 }
+*/

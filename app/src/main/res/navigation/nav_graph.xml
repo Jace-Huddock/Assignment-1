@@ -6,15 +6,21 @@
 
     <fragment
         android:id="@+id/currentConditionsFragment"
-        android:name="com.example.ics342proj.CurrentConditionsFragment"
+        android:name="com.example.ics342proj.data.CurrentConditionsFragment"
         android:label="CurrentConditionsFragment" >
         <action
             android:id="@+id/action_currentConditionsFragment_to_forecastFragment"
             app:destination="@id/forecastFragment" />
     </fragment>
 
+
     <fragment
         android:id="@+id/forecastFragment"
         android:name="com.example.ics342proj.ForecastFragment"
-        android:label="ForecastFragment" />
+        android:label="ForecastFragment" >
+        <argument
+            android:name="forecast"
+            app:nullable="false"
+            app:argType="com.example.ics342proj.Forecast" />
+    </fragment>
 </navigation>
