@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         }
 
         viewModel.viewState.observe(this) { currentConditions ->
-          //  viewBinding.cityName.text = currentConditions.cityName
+            //viewBinding.cityName.text = currentConditions.cityName
             //viewBinding.currentTemp.text = getString(R.string.current_temp, currentConditions.temp.toInt())
         }
     }
