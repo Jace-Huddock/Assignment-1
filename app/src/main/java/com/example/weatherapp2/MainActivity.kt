@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp2.ui.CurrentConditions
-import com.example.weatherapp2.ui.ForecastScreen
+import com.example.weatherapp2.ui.DayForecast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +24,10 @@ class MainActivity : ComponentActivity() {
                 }
 
                 composable("Forecast") {
-                    ForecastScreen()
+                    DayForecast{
+                        navController.navigate("CurrentConditions") {
+                        }
+                    }
                 }
             }
         }

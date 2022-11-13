@@ -1,14 +1,13 @@
 package com.example.weatherapp2.ui
 
 import android.annotation.SuppressLint
-import android.media.Image
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,23 +19,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.weatherapp2.R
 import com.example.weatherapp2.models.DayForecast
-import com.example.weatherapp2.models.ForecastTemp
-import com.example.weatherapp2.toHourMinute
-import com.example.weatherapp2.toMonthDay
-import org.intellij.lang.annotations.JdkConstants
+
 
 
 val startDay = 1665014340L
 val sunrise = 1664953200L
 val sunset = 1664996400L
 
+/*
 val forecastData = (0 until 16).map {
     DayForecast(
         date = startDay + (it * (24 * 60 * 60)),
@@ -46,12 +42,12 @@ val forecastData = (0 until 16).map {
         pressure = 1024f,
         humidity = 76,
     )
-}
+} */
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 
 @Composable
-fun ForecastScreen(
+fun DayForecast(
     viewModel: ForecastViewModel = hiltViewModel(),
     onForecastButtonClick: () -> Unit,
 ){
@@ -63,21 +59,18 @@ fun ForecastScreen(
         topBar = {AppBar(title = stringResource(id = R.string.app_name)) },
     ){
         state?.let {
-            DayForecastContent(it) {  // FIXME
+            DayForecastContent(it) {
                 onForecastButtonClick()
             }
-        }
-    }
-
-    LazyColumn {
-        items(items = forecastData) { item: DayForecast ->
-            ForecastRow(item = item)
         }
     }
 }
 
 @Composable
-private fun DayForecastContent(item: DayForecast) {
+private fun DayForecastContent(
+    dayForecast: DayForecast,
+    onForecastButtonClick: () -> Unit,
+) {
     Row(
         modifier = Modifier.background(Color.White),
         verticalAlignment = Alignment.CenterVertically,
@@ -88,7 +81,7 @@ private fun DayForecastContent(item: DayForecast) {
         Image(painter = painterResource(id = R.drawable.sun_icon), contentDescription = "")
         Spacer(modifier = Modifier.weight(1f, true))
         Text(
-            text = item.date.toMonthDay(),
+            text = stringResource(R.string.date),
             style = TextStyle(
                 fontSize = 16.sp,
             )
@@ -96,11 +89,11 @@ private fun DayForecastContent(item: DayForecast) {
         Spacer(modifier = Modifier.weight(1f, true))
         Column {
             Text(
-                text = stringResource(id = R.string.high_temp, item.forecastTemp.max.toInt()),
+                text = stringResource(id = R.string.date, dayForecast.forecast.date.toString()),
                 style = textStyle,
             )
             Text(
-                text = stringResource(id = R.string.low_temp, item.forecastTemp.min.toInt()),
+                text = stringResource(id = R.string.low_temp, dayForecast.forecast.min.toInt()),
                 style = textStyle,
             )
         }
@@ -109,11 +102,11 @@ private fun DayForecastContent(item: DayForecast) {
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = stringResource(id = R.string.sunrise, item.sunrise.toHourMinute()),
+                text = stringResource(id = R.string.sunrise, dayForecast.forecast.sunrise.toInt()),
                 style = textStyle,
             )
             Text(
-                text = stringResource(id = R.string.sunset, item.sunset.toHourMinute()),
+                text = stringResource(id = R.string.sunset, dayForecast.forecast.sunset.toInt()),
                 style = textStyle,
             )
         }
@@ -125,5 +118,5 @@ private fun DayForecastContent(item: DayForecast) {
 )
 @Composable
 private fun ForecastRowPreview() {
-    ForecastRow(item= forecastData[0])
+    DayForecast {}
 }

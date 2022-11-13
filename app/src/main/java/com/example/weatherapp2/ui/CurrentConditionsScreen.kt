@@ -42,7 +42,6 @@ fun CurrentConditions(
             }
         }
     }
-
 }
 
 @Composable
