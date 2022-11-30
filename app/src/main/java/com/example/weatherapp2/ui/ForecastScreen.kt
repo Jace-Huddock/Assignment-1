@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -47,9 +48,8 @@ val forecastData = (0 until 16).map {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 
 @Composable
-fun DayForecast(
+fun ForecastScreen(
     viewModel: ForecastViewModel = hiltViewModel(),
-    onForecastButtonClick: () -> Unit,
 ){
     val state by viewModel.dayForecast.collectAsState(null)
     LaunchedEffect(Unit){
@@ -59,9 +59,7 @@ fun DayForecast(
         topBar = {AppBar(title = stringResource(id = R.string.app_name)) },
     ){
         state?.let {
-            DayForecastContent(it) {
-                onForecastButtonClick()
-            }
+                DayForecastContent(it)
         }
     }
 }
@@ -69,7 +67,6 @@ fun DayForecast(
 @Composable
 private fun DayForecastContent(
     dayForecast: DayForecast,
-    onForecastButtonClick: () -> Unit,
 ) {
     Row(
         modifier = Modifier.background(Color.White),
@@ -115,9 +112,12 @@ private fun DayForecastContent(
 }
 
 @Preview(
-    showSystemUi = true,
+    name = "ForecastScreen",
+    device = Devices.PIXEL_4,
+    showBackground = true,
+    showSystemUi = true
 )
 @Composable
 private fun ForecastRowPreview() {
-    DayForecast {}
+
 }

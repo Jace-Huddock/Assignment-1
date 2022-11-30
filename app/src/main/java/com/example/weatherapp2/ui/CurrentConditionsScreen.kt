@@ -1,6 +1,7 @@
 package com.example.weatherapp2.ui
 
 import android.annotation.SuppressLint
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
@@ -22,10 +23,13 @@ import coil.compose.AsyncImage
 import com.example.weatherapp2.R
 import com.example.weatherapp2.models.CurrentConditions
 
+
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CurrentConditions(
+    hasLocationPermission: Boolean,
     viewModel: CurrentConditionsViewModel = hiltViewModel(),
+    onGetWeatherForMyLocationClick: () -> Unit,
     onForecastButtonClick: () -> Unit,
 ) {
     val state by viewModel.currentConditions.collectAsState(null)
@@ -37,16 +41,16 @@ fun CurrentConditions(
         topBar = {AppBar(title = stringResource(id = R.string.app_name)) },
     ){
         state?.let {
-            CurrentConditionsContent(it) {
-                onForecastButtonClick()
+            CurrentConditionsContent(it, onGetWeatherForMyLocationClick, onForecastButtonClick)
             }
         }
     }
-}
+
 
 @Composable
 private fun CurrentConditionsContent(
     currentConditions: CurrentConditions,
+    onGetWeatherForMyLocationClick: () -> Unit,
     onForecastButtonClick: () -> Unit,
 ) {
     Column(
@@ -110,6 +114,10 @@ private fun CurrentConditionsContent(
         Button(onClick = onForecastButtonClick) {
             Text(text = stringResource(id = R.string.forecast))
         }
+        Spacer(modifier = Modifier.height(24.dp))
+        Button(onClick = onGetWeatherForMyLocationClick) {
+            Text(text = stringResource(id = R.string.get_weather_for_my_location))
+        }
     }
 }
 
@@ -118,5 +126,5 @@ private fun CurrentConditionsContent(
 )
 @Composable
 fun CurrentConditionsPreview(){
-    CurrentConditions {}
+
 }
