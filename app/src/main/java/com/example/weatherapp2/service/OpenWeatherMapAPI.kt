@@ -20,4 +20,20 @@ interface OpenWeatherMapApi {
         @Query("appid") apiKey: String = "9c7e1f2a0b8de3d50451e550c61a9fa2",
         @Query("units") units: String = "imperial"
     ) : DayForecast
+
+    @GET("data/2.5/weather")
+    suspend fun getCurrentConditions(
+        @Query("lat") latitude: Float,
+        @Query("lon") longitude: Float,
+        @Query("appid") apiKey: String = "9c7e1f2a0b8de3d50451e550c61a9fa2",
+        @Query("units") units: String = "imperial"
+    ) : CurrentConditions
+
+    @GET("data/2.5/weather")
+    suspend fun getDayForecast(
+        @Query("lat") latitude: Float,
+        @Query("lon") longitude: Float,
+        @Query("appid") apiKey: String = "9c7e1f2a0b8de3d50451e550c61a9fa2",
+        @Query("units") units: String = "imperial"
+    ) : DayForecast
 }

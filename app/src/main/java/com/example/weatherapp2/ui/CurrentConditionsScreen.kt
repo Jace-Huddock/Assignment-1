@@ -22,21 +22,29 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.weatherapp2.R
 import com.example.weatherapp2.models.CurrentConditions
+import com.example.weatherapp2.models.LatitudeLongitude
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CurrentConditions(
-    hasLocationPermission: Boolean,
+    latitudeLongitude: LatitudeLongitude?,
     viewModel: CurrentConditionsViewModel = hiltViewModel(),
     onGetWeatherForMyLocationClick: () -> Unit,
     onForecastButtonClick: () -> Unit,
 ) {
     val state by viewModel.currentConditions.collectAsState(null)
-    
-    LaunchedEffect(Unit){
-        viewModel.fetchData()
-    }
+
+        if (latitudeLongitude != null) {
+            LaunchedEffect(Unit) {
+                viewModel.fetchCurrentLocationData(latitudeLongitude)
+            }
+        } else {
+            LaunchedEffect(Unit) {
+                viewModel.fetchData()
+            }
+        }
+
     Scaffold(
         topBar = {AppBar(title = stringResource(id = R.string.app_name)) },
     ){
@@ -60,7 +68,7 @@ private fun CurrentConditionsContent(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = stringResource(R.string.city),
+            text = currentConditions.cityName,
             style = TextStyle(
                 fontWeight = FontWeight(600),
                 fontSize = 24.sp
