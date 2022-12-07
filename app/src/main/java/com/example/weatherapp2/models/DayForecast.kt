@@ -18,5 +18,5 @@ data class ForecastTemp(
 )
 
 data class DayForecastConditions(
-    @Json(name = "list") val forecastData: List<DayForecastData>,
+    @Json(name = "list") val forecastData: List<DayForecastData>, //Stores forecast content
 )
