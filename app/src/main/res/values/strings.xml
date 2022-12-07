@@ -10,6 +10,6 @@
     <string name="sunset">Sunset: %s</string>
     <string name="forecast">Forecast</string>
     <string name="temperature">%s°</string>
-    <string name="date">monthDayYear: %s</string>
+    <string name="date">%s</string>
     <string name="get_weather_for_my_location">Get Weather for My Location</string>
 </resources>

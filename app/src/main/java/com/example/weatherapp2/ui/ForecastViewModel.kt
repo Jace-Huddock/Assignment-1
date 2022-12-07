@@ -1,7 +1,7 @@
 package com.example.weatherapp2.ui
 
 import androidx.lifecycle.ViewModel
-import com.example.weatherapp2.models.DayForecast
+import com.example.weatherapp2.models.DayForecastConditions
 import com.example.weatherapp2.models.LatitudeLongitude
 import com.example.weatherapp2.service.OpenWeatherMapApi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,9 +13,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ForecastViewModel @Inject constructor(private val api: OpenWeatherMapApi): ViewModel() {
-    private val _forecast = Channel<DayForecast>()
+    private val _forecast = Channel<DayForecastConditions>()
 
-    public val dayForecast: Flow<DayForecast> = _forecast.receiveAsFlow()
+    val dayForecast: Flow<DayForecastConditions> = _forecast.receiveAsFlow()
 
     fun fetchData() = runBlocking {
         val dayForecast = api.getDayForecast("55044")

@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
@@ -24,36 +25,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.weatherapp2.R
-import com.example.weatherapp2.models.DayForecast
-import com.example.weatherapp2.models.ForecastTemp
-import com.example.weatherapp2.models.LatitudeLongitude
+import com.example.weatherapp2.models.*
 import com.example.weatherapp2.toHourMinute
 import com.example.weatherapp2.toMonthDay
 
 
-val startDay = 1665014340L
-val sunrise = 1664953200L
-val sunset = 1664996400L
-
-
-val forecastData = (0 until 16).map {
-    DayForecast(
-        date = startDay + (it * (24 * 60 * 60)),
-        sunrise = sunrise + (it * (24 * 60 * 60)),
-        sunset = sunset + (it * (24 * 60 * 60)),
-        forecastTemp = ForecastTemp(min = 70f + it, max = 80f + it),
-        pressure = 1024f,
-        humidity = 76,
-        min = 10f,
-        max = 32f,
-        )
-}
-
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-
 @Composable
 fun ForecastScreen(
     latitudeLongitude: LatitudeLongitude?,
@@ -70,18 +51,34 @@ fun ForecastScreen(
             viewModel.fetchData()
         }
     }
+
+    Scaffold(
+        topBar = { AppBar(title = stringResource(id = R.string.app_name))},
+    ) {
+
+        state.let {
+            it?.let { it -> ForecastContent(it) }
+        }
+    }
+
+}
+
+@Composable
+private fun ForecastContent(
+    forecastConditions: DayForecastConditions,
+){
     LazyColumn {
-        items(items = forecastData) { item: DayForecast ->
+        items(items = forecastConditions.forecastData)  { item: DayForecastData ->
             ForecastRow(item = item)
         }
     }
 }
 
-@Composable
-fun ForecastRow(item: DayForecast) {
 
+@Composable
+fun ForecastRow(item: DayForecastData) =
     Row(
-        modifier = Modifier.background(Color.White),
+        modifier = Modifier.background(Color.White).padding(8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         val textStyle = TextStyle(
@@ -120,7 +117,7 @@ fun ForecastRow(item: DayForecast) {
             )
         }
     }
-}
+
 
 @Preview(
     name = "ForecastScreen",
@@ -130,7 +127,6 @@ fun ForecastRow(item: DayForecast) {
 )
 @Composable
 fun ForecastRowPreview() {
-   ForecastRow(item = forecastData[0])
 }
 
 
